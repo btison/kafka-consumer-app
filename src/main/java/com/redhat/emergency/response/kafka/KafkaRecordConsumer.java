@@ -1,4 +1,4 @@
-package org.acme.quarkus.kafka;
+package com.redhat.emergency.response.kafka;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
