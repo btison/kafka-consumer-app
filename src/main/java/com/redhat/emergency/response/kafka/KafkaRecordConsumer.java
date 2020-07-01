@@ -1,5 +1,6 @@
 package com.redhat.emergency.response.kafka;
 
+import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -26,7 +27,7 @@ public class KafkaRecordConsumer {
             metadata.ifPresent(m -> {
                 Headers headers = m.getHeaders();
                 Arrays.stream(headers.toArray()).forEach(header -> {
-                    sb.append(header.key()).append(": ").append(new String(header.value())).append(", ");
+                    sb.append(header.key()).append(": ").append(convertToString(header.key(), header.value())).append(", ");
                 });
             });
             String hs = sb.toString();
@@ -39,6 +40,14 @@ public class KafkaRecordConsumer {
             log.info("    Message key: " + message.getKey());
             log.info("    Message value: " + message.getPayload());
         });
+    }
+
+    private String convertToString(String key, byte[] bytes) {
+        if ("apicurio.globalId".equalsIgnoreCase(key)) {
+            return Long.toString(ByteBuffer.wrap(bytes).getLong());
+        } else {
+            return new String(bytes);
+        }
     }
 
 }
