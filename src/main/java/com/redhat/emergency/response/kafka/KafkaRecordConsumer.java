@@ -26,9 +26,7 @@ public class KafkaRecordConsumer {
             StringBuilder sb = new StringBuilder();
             metadata.ifPresent(m -> {
                 Headers headers = m.getHeaders();
-                Arrays.stream(headers.toArray()).forEach(header -> {
-                    sb.append(header.key()).append(": ").append(convertToString(header.key(), header.value())).append(", ");
-                });
+                Arrays.stream(headers.toArray()).forEach(header -> sb.append(header.key()).append(": ").append(convertToString(header.key(), header.value())).append(", "));
             });
             String hs = sb.toString();
             if (hs.length() > 2) {
