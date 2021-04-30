@@ -14,10 +14,10 @@ You can run your application in dev mode that enables live coding using:
 ## Packaging and running the application
 
 The application is packageable using `./mvnw package`.
-It produces the executable `kafka-producer-1.0-SNAPSHOT-runner.jar` file in `/target` directory.
+It produces the executable `kafka-consumer-1.0-SNAPSHOT-runner.jar` file in `/target` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
 
-The application is now runnable using `java -jar target/kafka-producer-1.0-SNAPSHOT-runner.jar`.
+The application is now runnable using `java -jar target/kafka-consumer-1.0-SNAPSHOT-runner.jar`.
 
 ## Creating a native executable
 
