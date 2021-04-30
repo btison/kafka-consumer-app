@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 import io.smallrye.reactive.messaging.kafka.IncomingKafkaRecord;
 import io.smallrye.reactive.messaging.kafka.IncomingKafkaRecordMetadata;
 import org.apache.kafka.common.header.Headers;
+import org.eclipse.microprofile.reactive.messaging.Acknowledgment;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +21,7 @@ public class KafkaRecordConsumer {
     private static final Logger log = LoggerFactory.getLogger(KafkaRecordConsumer.class);
 
     @Incoming("channel")
+    @Acknowledgment(Acknowledgment.Strategy.PRE_PROCESSING)
     public CompletionStage<Void> process(IncomingKafkaRecord<String, String> message) {
         return CompletableFuture.runAsync(() -> {
             Optional<IncomingKafkaRecordMetadata> metadata = message.getMetadata(IncomingKafkaRecordMetadata.class);
